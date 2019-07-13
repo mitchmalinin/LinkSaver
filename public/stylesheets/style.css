@@ -1,0 +1,117 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 0;
+  color: #4e6766; }
+
+a {
+  color: #00b7ff; }
+
+.home-page-content {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 20px; }
+
+.login {
+  text-align: center; }
+
+.login h5 {
+  font-size: 15px; }
+
+.login-signup-buttons {
+  width: 20%;
+  box-shadow: 1px 1px 8px #888888;
+  padding: 20px;
+  margin-top: 50px; }
+
+.login-signup-buttons h3 {
+  color: #4e6766;
+  text-align: center; }
+
+.login-btn {
+  background-color: transparent !important;
+  border: 2px solid #57e2e5;
+  border-radius: 5px;
+  color: #57e2e5;
+  width: 100px;
+  margin-top: 10px;
+  box-shadow: none; }
+
+input.validate.valid {
+  border-bottom: 1px solid #57e3e5bb !important;
+  box-shadow: 0 1px 0 0 #57e3e5bb !important; }
+
+input.validate {
+  border-bottom: 1px solid #2de3b286 !important;
+  box-shadow: 0 1px 0 0 #2de3b286 !important; }
+
+form label {
+  color: #4e6766 !important; }
+
+.homepage-break {
+  margin-top: 20px;
+  border-color: #57e3e52a;
+  margin-bottom: 30px; }
+
+nav {
+  background-color: #713afc !important; }
+
+.logout {
+  background-image: linear-gradient(to right, #2edbaf, #57e2e5);
+  line-height: 0;
+  height: 40px;
+  margin-right: 50px;
+  border-radius: 5px; }
+
+nav a {
+  background-color: transparent !important;
+  color: #fff !important;
+  padding: 0 20px !important; }
+
+.nav-wrapper {
+  background-color: transparent !important;
+  color: #fff;
+  box-shadow: none !important;
+  display: flex;
+  justify-content: space-between; }
+
+#nav-mobile li a {
+  color: #fff !important; }
+
+.sign-up-btn,
+.login-module-btn {
+  background-image: linear-gradient(to right, #2edbaf, #57e2e5);
+  width: 100%;
+  line-height: 0;
+  height: 40px;
+  border-radius: 5px;
+  margin-bottom: 20px; }
+
+#modal1 {
+  width: 30%; }
+
+.modal-content {
+  padding-bottom: 0px !important; }
+
+.search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 40%; }
+
+.search input {
+  margin-right: 30px !important; }
+
+.search button {
+  margin-right: 0 !important;
+  padding: 0 !important;
+  width: 10%; }
+
+.dashboard {
+  min-height: 100vh;
+  padding: 20px; }
+
+.dashboard h2 {
+  margin: 0;
+  font-size: 30px; }
+
+/*# sourceMappingURL=style.css.map */

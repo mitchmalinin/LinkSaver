@@ -1,0 +1,59 @@
+<div class="home-page-content">
+  <div class="welcome">
+    <h1>Welcome to Link Saver</h1>
+    <img src="" alt="">
+  </div>
+  <div class="login-signup-buttons">
+
+    <div class="signup-button">
+      <h3>Sign Up</h3>
+      {{#if msg}}
+      <p class='flash'>
+        {{msg}}
+      </p>
+      {{/if}}
+      <form action="/user/sign-up" class="col s12" method="POST">
+        <div class="row">
+          <div class="input-field col s12">
+            <input name="firstName" type="text" class="validate">
+            <label>First Name:</label>
+          </div>
+          <div class="input-field col s12">
+            <input name="lastName" type="text" class="validate">
+            <label>Last Name:</label>
+          </div>
+          <div class="input-field col s12">
+            <input name="username" type="text" class="validate">
+            <label>Username:</label>
+          </div>
+          <div class="input-field col s12">
+            <input name="email" type="text" class="validate">
+            <label>Email:</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input name="password" type="password" class="validate">
+            <label>Password:</label>
+          </div>
+        </div>
+        <button class="waves-effect waves-light btn-large sign-up-btn">sign up</button>
+      </form>
+      <hr class="homepage-break">
+    </div>
+    <div class="login">
+      <h5>Have an Account? Login below</h5>
+      <a class="waves-effect waves-light btn modal-trigger login-btn" href="#modal1">Login</a>
+      <!-- Modal Structure -->
+      <div id="modal1" class="modal">
+        <div class="modal-content">
+          {{> login}}
+        </div>
+        <div class="modal-footer">
+          <a href="#modal1" class="modal-close waves-effect waves-green btn-flat">close</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
