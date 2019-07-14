@@ -1,4 +1,35 @@
 {{> nav}}
 <div class="dashboard">
-  <h2> Welcome, {{user.username}}</h2>
+  <div class="sidebar">
+    {{#if msg}}
+    <p class='error'>
+      {{msg}}
+    </p>
+    {{/if}}
+    {{#if success}}
+    <p class='success'>
+      {{success}}
+    </p>
+    {{/if}}
+    <h2>Link Saver</h2>
+    <div class="add-btn-container">
+      <a class="waves-effect waves-light btn modal-trigger add-bookmark user-btn" href="#modal2">Add Bookmark</a>
+      <a class="waves-effect waves-light btn modal-trigger create-group user-btn" href="#modal2">Add Folder</a>
+    </div>
+    <h5>Folders</h5>
+    <div id="modal2" class="modal">
+      <div class="modal-content">
+        {{> bookmark}}
+      </div>
+      <div class="modal-footer">
+        <a href="#modal2" class="modal-close waves-effect waves-green btn-flat">close</a>
+      </div>
+    </div>
+  </div>
+  <div class="user-content">
+    {{#each bookmark}}
+    {{> bookmarkCard}}
+    {{/each}}
+  </div>
+
 </div>

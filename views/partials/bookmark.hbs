@@ -1,0 +1,41 @@
+<div class="bookmark-content">
+  <h2>Add Bookmark</h2>
+  <div class="row">
+    <form action="/user/save-bookmark" class="col s12" method="POST">
+      <div class="row">
+        <div class="input-field col s12">
+          <input name="url" type="text" class="validate">
+          <label>Url:</label>
+        </div>
+        <div class="input-field col s12">
+          <input name="title" type="text" class="validate">
+          <label>Title:</label>
+        </div>
+        <div class="input-field col s12">
+          <input name="description" type="text" class="validate">
+          <label>Description:</label>
+        </div>
+        <div class="input-field col s12">
+          <a class='dropdown-trigger btn' href='#dropdown1' data-target='dropdown1'>Folder</a>
+          <!-- Dropdown Structure -->
+          <ul id='dropdown1' class='dropdown-content'>
+            <li><a href="#!">one</a></li>
+            <li><a href="#!">two</a></li>
+            <li><a href="#!">three</a></li>
+          </ul>
+        </div>
+        <div class="input-field col s12">
+          <div class="switch">
+            <label>
+              public
+              <input type="checkbox" name="isPublic">
+              <span class="lever"></span>
+              private
+            </label>
+          </div>
+        </div>
+      </div>
+      <button class="waves-effect waves-light btn-large login-module-btn">Save</button>
+    </form>
+  </div>
+</div>

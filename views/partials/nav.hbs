@@ -1,16 +1,16 @@
 <nav class="">
   <div class="nav-wrapper">
     <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a href="/sign-up">Public</a></li>
+      <li><a href="/user/homepage">Home</a></li>
       <li><a href="/login">Private</a></li>
       <li><a href="/login">News Feed</a></li>
     </ul>
-    <form class="search" action="/user/logout" method="POST">
-      Url: <input type="text" name="fname">
-      <button class="waves-effect waves-light btn-large logout"> save</button>
+    <form class="search" action="/user/save-bookmark" method="POST">
+      Search: <input type="text" name="fname">
+      <button class="waves-effect waves-light btn-large search-btn"> search</button>
     </form>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a href="/login">Account</a></li>
+      <li><a class="username-display" href="/login">Hi, {{user.username}}</a></li>
       <li>
         <form action="/user/logout" method="POST">
           <button class="waves-effect waves-light btn-large logout"> Log Out</button>

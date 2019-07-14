@@ -8,8 +8,13 @@
     <div class="signup-button">
       <h3>Sign Up</h3>
       {{#if msg}}
-      <p class='flash'>
+      <p class='error'>
         {{msg}}
+      </p>
+      {{/if}}
+      {{#if success}}
+      <p class='success'>
+        {{success}}
       </p>
       {{/if}}
       <form action="/user/sign-up" class="col s12" method="POST">
@@ -30,8 +35,6 @@
             <input name="email" type="text" class="validate">
             <label>Email:</label>
           </div>
-        </div>
-        <div class="row">
           <div class="input-field col s12">
             <input name="password" type="password" class="validate">
             <label>Password:</label>
