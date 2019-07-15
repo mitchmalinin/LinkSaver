@@ -5,7 +5,71 @@
   <div class="card-content">
     <span class="card-title activator grey-text text-darken-4">{{this.title}}<i
         class="material-icons right">more_vert</i></span>
-    <p><a href="{{this.url}}">Visit Bookmark</a></p>
+    <div class="bookmark-options">
+      <a href="{{this.url}}" target="_blank">Visit {{this.title}}</a>
+      <div class="edit-delete-buttons">
+        <a href="#/user/{{this._id}}" class="modal-trigger">
+          <button class="btn-floating btn-small waves-effect waves-light teal lighten">
+            <i class="material-icons delete">edit</i>
+          </button>
+        </a>
+        <form action="/user/{{this._id}}/delete" method="POST">
+          <button class="btn-floating btn-small waves-effect waves-light red darken-1">
+            <i class="material-icons delete">close</i>
+          </button>
+        </form>
+      </div>
+      {{!-- start of edit modal --}}
+      <div id="/user/{{this._id}}" class="modal">
+        <div class="modal-content">
+          <div class="bookmark-content">
+            <h2>Update Bookmark</h2>
+            <div class="row">
+              <form action="/user/{{this._id}}/update" class="col s12" method="POST">
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input name="url" type="text" class="validate" value="{{this.url}}">
+                    <label>Url:</label>
+                  </div>
+                  <div class=" input-field col s12">
+                    <input name="title" type="text" class="validate" value="{{this.title}}">
+                    <label>Title:</label>
+                  </div>
+                  <div class="input-field col s12">
+                    <input name="description" type="text" class="validate" value="{{this.description}}">
+                    <label>Description:</label>
+                  </div>
+                  <div class="input-field col s12 dropdown-edit">
+                    <a class='dropdown-trigger btn' href='#' data-target='{{this._id}}'>Folder</a>
+                    <!-- Dropdown Structure -->
+                    <ul id='{{this._id}}' class='dropdown-content'>
+                      <li><a href="#!">one</a></li>
+                      <li><a href="#!">two</a></li>
+                      <li><a href="#!">three</a></li>
+                    </ul>
+                  </div>
+                  <div class="input-field col s12">
+                    <div class="switch">
+                      <label>
+                        public
+                        <input id="isPublic" type="checkbox" name="is_public" value="false">
+                        <span class="lever"></span>
+                        private
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <button class="waves-effect waves-light btn-large login-module-btn">Save</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a href="#modal3" class="modal-close waves-effect waves-green btn-flat">close</a>
+        </div>
+      </div>
+      {{!-- end of edit modal --}}
+    </div>
   </div>
   <div class="card-reveal">
     <span class="card-title grey-text text-darken-4">Description<i class="material-icons right">close</i></span>

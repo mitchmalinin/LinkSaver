@@ -39,11 +39,13 @@ a {
 
 input.validate.valid {
   border-bottom: 1px solid #57e3e5bb !important;
-  box-shadow: 0 1px 0 0 #57e3e5bb !important; }
+  box-shadow: 0 1px 0 0 #57e3e5bb !important;
+  color: #4e6766 !important; }
 
 input.validate {
   border-bottom: 1px solid #2de3b286 !important;
-  box-shadow: 0 1px 0 0 #2de3b286 !important; }
+  box-shadow: 0 1px 0 0 #2de3b286 !important;
+  color: #4e6766 !important; }
 
 form label {
   color: #4e6766 !important; }
@@ -188,11 +190,34 @@ nav a {
   border-radius: 0 0 5px 5px !important; }
 
 .card a {
-  color: #57e2e5; }
+  color: #713afc !important; }
 
 .card-image {
   background-color: #343b3a94;
   height: 200px;
   border-radius: 5px 5px 0 0 !important; }
+
+.bookmark-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+
+.edit-delete-buttons {
+  display: flex; }
+
+.edit-delete-buttons button {
+  margin-left: 10px; }
+
+.edit-delete-buttons button {
+  background-image: linear-gradient(to right, #57e2e5, #57e2e5); }
+
+.edit-delete-buttons .red {
+  background-image: linear-gradient(to right, #a682ff, #a682ff) !important; }
+
+.bookmark-content a {
+  color: #fff !important; }
+
+.bookmark-content ul li a {
+  color: #2edbaf !important; }
 
 /*# sourceMappingURL=style.css.map */

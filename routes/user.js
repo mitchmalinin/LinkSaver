@@ -7,6 +7,9 @@ const passport = require("passport");
 const ensureLogin = require("connect-ensure-login");
 const flash = require("connect-flash");
 const LocalStrategy = require("passport-local").Strategy;
+const bodyParser = require("body-parser");
+
+router.use(bodyParser());
 
 //FIXME: Error when the email is not right
 //TODO: Try to figure out how to signup and login at the same time
@@ -155,7 +158,7 @@ router.post("/save-bookmark", (req, res, next) => {
   const title = req.body.title;
   const url = req.body.url;
   const description = req.body.description;
-  const isPublic = req.body.isPublic;
+  let isPublic = req.body.is_public;
 
   if (title === "" || url === "") {
     req.flash("error", "Missing values");
@@ -173,7 +176,7 @@ router.post("/save-bookmark", (req, res, next) => {
         title: title,
         url: url,
         description: description,
-        isPublic: isPublic
+        is_public: isPublic
       })
         .then(bookmark => {
           console.log("Test");
@@ -187,6 +190,43 @@ router.post("/save-bookmark", (req, res, next) => {
         });
     }
   });
+});
+
+router.post("/:id/delete", (req, res, next) => {
+  Bookmark.findByIdAndDelete(req.params.id)
+    .then(bookmark => {
+      req.flash("success", "Bookmark removed");
+      res.redirect("/user/homepage");
+    })
+    .catch(err => {
+      next(err);
+    });
+});
+
+router.post("/:id/update", (req, res, next) => {
+  let title = req.body.title;
+  let url = req.body.url;
+  let description = req.body.description;
+  let is_public = req.body.is_public;
+
+  if (is_public == null) {
+    is_public = true;
+  }
+
+  const data = {
+    title,
+    url,
+    description,
+    is_public
+  };
+  Bookmark.findByIdAndUpdate(req.params.id, data)
+    .then(() => {
+      req.flash("success", "Bookmark updated");
+      res.redirect("/user/homepage");
+    })
+    .catch(err => {
+      next(err);
+    });
 });
 
 module.exports = router;
