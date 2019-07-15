@@ -10,7 +10,7 @@ const bookMarkSchema = new Schema(
     is_public: { type: Boolean, default: true },
     owner: { type: Schema.Types.ObjectId, ref: "User" },
     saves: [{ type: Schema.Types.ObjectId, ref: "User" }],
-    folder: { type: Schema.Types.ObjectId, ref: "BookmarkGroup" }
+    folder: { type: Schema.Types.ObjectId, ref: "Folder" }
   },
   {
     timestamps: true

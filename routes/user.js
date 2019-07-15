@@ -268,9 +268,20 @@ router.get("/folder/:id", (req, res, next) => {
   let data = req.user;
   Folder.findById(req.params.id)
     .then(oneFolder => {
-      Folder.find({ owner: req.user._id })
-        .then(folder => {
-          res.render("homepage", { user: data, oneFolder: oneFolder, folder });
+      Bookmark.find({ owner: req.user._id, folder: oneFolder._id })
+        .then(bookmark => {
+          Folder.find()
+            .then(folder => {
+              res.render("homepage", {
+                user: data,
+                oneFolder: oneFolder,
+                bookmark,
+                folder
+              });
+            })
+            .catch(err => {
+              next(err);
+            });
         })
         .catch(err => {
           next(err);
