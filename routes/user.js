@@ -140,7 +140,7 @@ router.post("/logout", (req, res) => {
 router.get("/homepage", ensureLogin.ensureLoggedIn("/"), (req, res, next) => {
   let data = req.user;
   console.log(data);
-  Bookmark.find()
+  Bookmark.find({ owner: req.user._id })
     .then(bookmark => {
       console.log("------------", bookmark);
       res.render("homepage", { bookmark, user: data });
@@ -154,7 +154,9 @@ router.get("/homepage", ensureLogin.ensureLoggedIn("/"), (req, res, next) => {
 //User Actions
 router.post("/save-bookmark", (req, res, next) => {
   let data = req.body;
-  console.table(req.body);
+  let user = req.user;
+  console.log("=-=-----=---=-=-", user);
+
   const title = req.body.title;
   const url = req.body.url;
   const description = req.body.description;
@@ -166,8 +168,9 @@ router.post("/save-bookmark", (req, res, next) => {
     return;
   }
 
-  Bookmark.findOne({ url: url }).then(foundUrl => {
-    if (foundUrl !== null) {
+  Bookmark.find({ url: url, owner: user._id }).then(foundUrl => {
+    console.log(foundUrl);
+    if (foundUrl !== null && foundUrl.owner === user._id) {
       req.flash("error", "You already have this url saved");
       res.redirect("/user/homepage");
       return;
@@ -176,7 +179,8 @@ router.post("/save-bookmark", (req, res, next) => {
         title: title,
         url: url,
         description: description,
-        is_public: isPublic
+        is_public: isPublic,
+        owner: user._id
       })
         .then(bookmark => {
           console.log("Test");
