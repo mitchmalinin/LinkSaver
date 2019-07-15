@@ -9,7 +9,7 @@ const bookMarkSchema = new Schema(
     description: { type: String },
     is_public: { type: Boolean, default: true },
     owner: { type: Schema.Types.ObjectId, ref: "User" },
-    likes: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    saves: [{ type: Schema.Types.ObjectId, ref: "User" }],
     folder: { type: Schema.Types.ObjectId, ref: "BookmarkGroup" }
   },
   {

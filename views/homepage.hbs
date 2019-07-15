@@ -17,6 +17,12 @@
       <a class="waves-effect waves-light btn modal-trigger create-group user-btn" href="#modal3">Add Folder</a>
     </div>
     <h5>Folders</h5>
+    <div class="all-folders">
+      {{#each folder}}
+      <a class="waves-effect waves-light btn modal-trigger create-group folder"
+        href="/user/folder/{{this._id}}">{{this.name}}</a>
+      {{/each}}
+    </div>
     <div id="modal2" class="modal">
       <div class="modal-content">
         {{> bookmark}}
@@ -27,8 +33,7 @@
     </div>
     <div id="modal3" class="modal">
       <div class="modal-content">
-        {{!-- {{> bookmark}} --}}
-        test
+        {{> folder}}
       </div>
       <div class="modal-footer">
         <a href="#modal3" class="modal-close waves-effect waves-green btn-flat">close</a>
@@ -36,6 +41,9 @@
     </div>
   </div>
   <div class="user-content">
+    {{#if oneFolder.name}}
+    <h2>{{oneFolder.name}}</h2>
+    {{/if}}
     {{#each bookmark}}
     {{> bookmarkCard}}
     {{/each}}

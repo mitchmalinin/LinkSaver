@@ -1,0 +1,24 @@
+<div class="bookmark-content">
+  <h2>Add Folder</h2>
+  <div class="row">
+    <form action="/user/create-folder" class="col s12" method="POST">
+      <div class="row">
+        <div class="input-field col s12">
+          <input name="name" type="text" class="validate">
+          <label>Name:</label>
+        </div>
+        <div class="input-field col s12">
+          <div class="switch">
+            <label>
+              public
+              <input type="checkbox" name="is_public" value="false">
+              <span class="lever"></span>
+              private
+            </label>
+          </div>
+        </div>
+      </div>
+      <button class="waves-effect waves-light btn-large login-module-btn">Save</button>
+    </form>
+  </div>
+</div>

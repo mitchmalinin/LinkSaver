@@ -22,7 +22,8 @@ a {
   width: 25%;
   box-shadow: 1px 1px 8px #888888;
   padding: 20px;
-  margin-top: 50px; }
+  margin-top: 50px;
+  margin-bottom: 50px; }
 
 .login-signup-buttons h3 {
   color: #4e6766;
@@ -219,5 +220,44 @@ nav a {
 
 .bookmark-content ul li a {
   color: #2edbaf !important; }
+
+.all-folders {
+  width: 100% !important; }
+
+.folder {
+  background-image: linear-gradient(to right, #713afc, #a682ff) !important;
+  width: 100% !important;
+  margin: 10px 0;
+  border-radius: 5px; }
+
+.dropdown-content {
+  width: 150px !important; }
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #4e6766;
+  list-style-type: none;
+  font-weight: bold;
+  padding: 0 20px;
+  border-top: 2px solid #8888883b; }
+
+footer ul {
+  display: flex;
+  color: #4e6766;
+  align-items: center; }
+
+footer ul li a {
+  margin: 20px;
+  text-decoration: none;
+  color: #4e6766;
+  transition: all 0.2s ease-in-out; }
+
+footer ul li a:hover {
+  color: #4be7df; }
+
+.all-content {
+  min-height: 100vh; }
 
 /*# sourceMappingURL=style.css.map */

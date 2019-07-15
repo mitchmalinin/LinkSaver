@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
 const Bookmark = require("../models/bookmark");
+const Folder = require("../models/bookmarkGroups");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
 const ensureLogin = require("connect-ensure-login");
@@ -142,12 +143,18 @@ router.get("/homepage", ensureLogin.ensureLoggedIn("/"), (req, res, next) => {
   console.log(data);
   Bookmark.find({ owner: req.user._id })
     .then(bookmark => {
-      console.log("------------", bookmark);
-      res.render("homepage", { bookmark, user: data });
+      Folder.find({ owner: req.user._id })
+        .then(folder => {
+          res.render("homepage", { bookmark, user: data, folder });
+        })
+        .catch(err => {
+          next(err);
+        });
     })
     .catch(err => {
       next(err);
     });
+
   // res.render("homepage", { user: data });
 });
 
@@ -161,6 +168,8 @@ router.post("/save-bookmark", (req, res, next) => {
   const url = req.body.url;
   const description = req.body.description;
   let isPublic = req.body.is_public;
+  const folder = req.body.folder;
+  console.log("=-=-=-=-=-=-=-=-=-=-=-=-", req.body.folder);
 
   if (title === "" || url === "") {
     req.flash("error", "Missing values");
@@ -180,7 +189,8 @@ router.post("/save-bookmark", (req, res, next) => {
         url: url,
         description: description,
         is_public: isPublic,
-        owner: user._id
+        owner: user._id,
+        folder: folder
       })
         .then(bookmark => {
           console.log("Test");
@@ -227,6 +237,44 @@ router.post("/:id/update", (req, res, next) => {
     .then(() => {
       req.flash("success", "Bookmark updated");
       res.redirect("/user/homepage");
+    })
+    .catch(err => {
+      next(err);
+    });
+});
+
+//making folders
+
+router.post("/create-folder", (req, res, next) => {
+  let name = req.body.name;
+  let is_public = req.body.is_public;
+  let owner = req.user._id;
+
+  Folder.create({
+    name: name,
+    is_public: is_public,
+    owner: owner
+  })
+    .then(() => {
+      req.flash("success", "Group added");
+      res.redirect("/user/homepage");
+    })
+    .catch(err => {
+      next(err);
+    });
+});
+
+router.get("/folder/:id", (req, res, next) => {
+  let data = req.user;
+  Folder.findById(req.params.id)
+    .then(oneFolder => {
+      Folder.find({ owner: req.user._id })
+        .then(folder => {
+          res.render("homepage", { user: data, oneFolder: oneFolder, folder });
+        })
+        .catch(err => {
+          next(err);
+        });
     })
     .catch(err => {
       next(err);

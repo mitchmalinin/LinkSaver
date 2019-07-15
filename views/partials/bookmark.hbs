@@ -16,13 +16,11 @@
           <label>Description:</label>
         </div>
         <div class="input-field col s12">
-          <a class='dropdown-trigger btn' href='#dropdown1' data-target='dropdown1'>Folder</a>
-          <!-- Dropdown Structure -->
-          <ul id='dropdown1' class='dropdown-content'>
-            <li><a href="#!">one</a></li>
-            <li><a href="#!">two</a></li>
-            <li><a href="#!">three</a></li>
-          </ul>
+          <select name="folder">
+            {{#each folder}}
+            <option value="{{this._id}}">{{this.name}}</option>
+            {{/each}}
+          </select>
         </div>
         <div class="input-field col s12">
           <div class="switch">

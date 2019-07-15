@@ -30,6 +30,7 @@ a {
   box-shadow: 1px 1px 8px #888888;
   padding: 20px;
   margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .login-signup-buttons h3 {
@@ -69,6 +70,7 @@ form label {
 }
 nav {
   background-color: #713afc !important;
+  // background-image: linear-gradient(to right, #713afc, #57e2e5) !important;
 }
 
 .username-display {
@@ -113,6 +115,7 @@ nav a {
 .sign-up-btn,
 .login-module-btn {
   background-image: linear-gradient(to right, #2edbaf, #57e2e5);
+  // background-image: linear-gradient(to right, #713afc, #57e2e5) !important;
   width: 100%;
   line-height: 0;
   height: 40px;
@@ -206,6 +209,7 @@ nav a {
 }
 .user-btn {
   background-image: linear-gradient(to right, #2edbaf, #57e2e5);
+  // background-image: linear-gradient(to right, #713afc, #57e2e5) !important;
   // background-image: linear-gradient(to right, #a682ff, #713afc) !important;
   width: 100%;
   margin: 20px 0;
@@ -276,4 +280,51 @@ nav a {
 
 .bookmark-content ul li a {
   color: #2edbaf !important;
+}
+
+.all-folders {
+  width: 100% !important;
+}
+.folder {
+  background-image: linear-gradient(to right, #713afc, #a682ff) !important;
+  width: 100% !important;
+  margin: 10px 0;
+  border-radius: 5px;
+}
+
+.dropdown-content {
+  width: 150px !important;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #4e6766;
+  list-style-type: none;
+  font-weight: bold;
+  padding: 0 20px;
+  // background-image: linear-gradient(to right, #713afc, #713afc) !important;
+  // background-color: #713afc0a;
+  border-top: 2px solid #8888883b;
+}
+
+footer ul {
+  display: flex;
+  color: #4e6766;
+  align-items: center;
+}
+
+footer ul li a {
+  margin: 20px;
+  text-decoration: none;
+  color: #4e6766;
+  transition: all 0.2s ease-in-out;
+}
+
+footer ul li a:hover {
+  color: #4be7df;
+}
+.all-content {
+  min-height: 100vh;
 }
