@@ -50,12 +50,21 @@
                   </div>
                   <div class="input-field col s12">
                     <div class="switch">
+                      {{#if this.is_public}}
                       <label>
                         public
                         <input id="isPublic" type="checkbox" name="is_public" value="false">
                         <span class="lever"></span>
                         private
                       </label>
+                      {{else}}
+                      <label>
+                        public
+                        <input id="isPublic" type="checkbox" name="is_public" value="false" checked="true">
+                        <span class="lever"></span>
+                        private
+                      </label>
+                      {{/if}}
                     </div>
                   </div>
                 </div>
