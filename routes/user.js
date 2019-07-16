@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const session = require("express-session");
 const User = require("../models/user");
 const Bookmark = require("../models/bookmark");
 const Folder = require("../models/bookmarkGroups");
@@ -144,8 +145,11 @@ router.get("/homepage", ensureLogin.ensureLoggedIn("/"), (req, res, next) => {
   Bookmark.find({ owner: req.user._id })
     .then(bookmark => {
       Folder.find({ owner: req.user._id })
-        .then(folder => {
-          res.render("homepage", { bookmark, user: data, folder });
+        .then(folders => {
+          // req.theFolders = folders;
+          console.log("req folders =============== ", req.theFolders);
+          // next();
+          res.render("homepage", { bookmark, user: data, folders });
         })
         .catch(err => {
           next(err);
@@ -206,15 +210,52 @@ router.post("/save-bookmark", (req, res, next) => {
   });
 });
 
-router.post("/:id/delete", (req, res, next) => {
-  Bookmark.findByIdAndDelete(req.params.id)
-    .then(bookmark => {
-      req.flash("success", "Bookmark removed");
-      res.redirect("/user/homepage");
-    })
-    .catch(err => {
-      next(err);
-    });
+router.post("/:id/delete", async (req, res, next) => {
+  try {
+    const bookmark = await Bookmark.findByIdAndDelete(req.params.id);
+    req.flash("success", "Bookmark removed");
+    res.redirect("/user/homepage");
+  } catch (error) {
+    next(err);
+  }
+
+  // Bookmark.findByIdAndDelete(req.params.id)
+  //   .then(bookmark => {
+  //     req.flash("success", "Bookmark removed");
+  //     res.redirect("/user/homepage");
+  //   })
+  //   .catch(err => {
+  //     next(err);
+  //   });
+});
+
+router.post("/folder/:id/delete", async (req, res, next) => {
+  try {
+    await Folder.findByIdAndDelete(req.params.id);
+    req.flash("success", "Folder removed");
+    res.redirect("/user/homepage");
+  } catch (error) {
+    next(err);
+  }
+});
+router.post("/folder/:id/update", async (req, res, next) => {
+  let name = req.body.name;
+  let is_public = req.body.is_public;
+  if (is_public == null) {
+    is_public = true;
+  }
+  const data = {
+    name: name,
+    is_public: is_public
+  };
+
+  try {
+    await Folder.findByIdAndUpdate(req.params.id, data);
+    req.flash("success", "Folder updated");
+    res.redirect(`/user/folder/${req.params.id}`);
+  } catch (error) {
+    next(err);
+  }
 });
 
 router.post("/:id/update", (req, res, next) => {
@@ -245,11 +286,18 @@ router.post("/:id/update", (req, res, next) => {
 
 //making folders
 
-router.post("/create-folder", (req, res, next) => {
+router.post("/create-folder", async (req, res, next) => {
   let name = req.body.name;
   let is_public = req.body.is_public;
   let owner = req.user._id;
-
+  // try {
+  // await Folder.create({ name: name, is_public: is_public, owner: owner });
+  // req.flash("success", "Group added");
+  //     res.redirect("/user/homepage");
+  //   })
+  // } catch (error) {
+  //  next(error);
+  // }
   Folder.create({
     name: name,
     is_public: is_public,
@@ -264,32 +312,49 @@ router.post("/create-folder", (req, res, next) => {
     });
 });
 
-router.get("/folder/:id", (req, res, next) => {
+router.get("/folder/:id", async (req, res, next) => {
   let data = req.user;
-  Folder.findById(req.params.id)
-    .then(oneFolder => {
-      Bookmark.find({ owner: req.user._id, folder: oneFolder._id })
-        .then(bookmark => {
-          Folder.find()
-            .then(folder => {
-              res.render("homepage", {
-                user: data,
-                oneFolder: oneFolder,
-                bookmark,
-                folder
-              });
-            })
-            .catch(err => {
-              next(err);
-            });
-        })
-        .catch(err => {
-          next(err);
-        });
-    })
-    .catch(err => {
-      next(err);
+  try {
+    const oneFolder = await Folder.findById(req.params.id);
+    const folders = await Folder.find({ owner: req.user._id });
+    const bookmark = await Bookmark.find({
+      owner: req.user._id,
+      folder: oneFolder._id
     });
+    res.render("homepage", {
+      user: data,
+      oneFolder: oneFolder,
+      bookmark,
+      folders
+    });
+  } catch (error) {
+    next(error);
+  }
+
+  // Folder.findById(req.params.id)
+  //   .then(oneFolder => {
+  //     Bookmark.find({ owner: req.user._id, folder: oneFolder._id })
+  //       .then(bookmark => {
+  //         Folder.find()
+  //           .then(folder => {
+  //             res.render("homepage", {
+  //               user: data,
+  //               oneFolder: oneFolder,
+  //               bookmark,
+  //               folder
+  //             });
+  //           })
+  //           .catch(err => {
+  //             next(err);
+  //           });
+  //       })
+  //       .catch(err => {
+  //         next(err);
+  //       });
+  //   })
+  //   .catch(err => {
+  //     next(err);
+  //   });
 });
 
 module.exports = router;

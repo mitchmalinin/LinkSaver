@@ -18,7 +18,7 @@
     </div>
     <h5>Folders</h5>
     <div class="all-folders">
-      {{#each folder}}
+      {{#each folders}}
       <a class="waves-effect waves-light btn modal-trigger create-group folder"
         href="/user/folder/{{this._id}}">{{this.name}}</a>
       {{/each}}
@@ -40,13 +40,81 @@
       </div>
     </div>
   </div>
-  <div class="user-content">
-    {{#if oneFolder.name}}
-    <h2>{{oneFolder.name}}</h2>
-    {{/if}}
-    {{#each bookmark}}
-    {{> bookmarkCard}}
-    {{/each}}
+  <div class="total-user-content">
+    <div class="folder-name">
+      <div class="folder-title">
+        {{#if oneFolder.name}}
+        <h2>{{oneFolder.name}}</h2>
+      </div>
+      <div class="edit-delete-buttons">
+        <a href="#/folder/{{oneFolder._id}}" class="modal-trigger">
+          <button class="btn-floating btn-small waves-effect waves-light teal lighten">
+            <i class="material-icons delete">add</i>
+          </button>
+        </a>
+        <a href="#/folder/{{oneFolder._id}}" class="modal-trigger">
+          <button class="btn-floating btn-small waves-effect waves-light teal lighten">
+            <i class="material-icons delete">edit</i>
+          </button>
+        </a>
+
+        <div id="/folder/{{oneFolder._id}}" class="modal">
+          <div class="modal-content">
+            {{!-- Start of model --}}
+            <div class="bookmark-content">
+              <h2>Edit Folder</h2>
+              <div class="row">
+                <form action="/user/folder/{{oneFolder.id}}/update" class="col s12" method="POST">
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input name="name" type="text" class="validate" value="{{oneFolder.name}}">
+                      <label>Name:</label>
+                    </div>
+                    <div class="input-field col s12">
+                      <div class="switch">
+                        {{#if oneFolder.is_public}}
+                        <label>
+                          public
+                          <input id="isPublic" type="checkbox" name="is_public" value="false">
+                          <span class="lever"></span>
+                          private
+                        </label>
+                        {{else}}
+                        <label>
+                          public
+                          <input id="isPublic" type="checkbox" name="is_public" value="false" checked="true">
+                          <span class="lever"></span>
+                          private
+                        </label>
+                        {{/if}}
+                      </div>
+                    </div>
+                  </div>
+                  <button class="waves-effect waves-light btn-large login-module-btn">Save</button>
+                </form>
+              </div>
+            </div>
+            {{!-- end of module --}}
+          </div>
+          <div class="modal-footer">
+            <a href="#modal3" class="modal-close waves-effect waves-green btn-flat">close</a>
+          </div>
+        </div>
+        <form action="/user/folder/{{oneFolder._id}}/delete" method="POST">
+          <button class="btn-floating btn-small waves-effect waves-light red darken-1">
+            <i class="material-icons delete">close</i>
+          </button>
+        </form>
+        {{/if}}
+      </div>
+    </div>
+    <div class="user-content">
+
+      {{#each bookmark}}
+      {{> bookmarkCard bookmark = this folders=../folders}}
+      {{/each}}
+
+    </div>
   </div>
 
 </div>

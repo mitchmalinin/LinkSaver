@@ -7,10 +7,15 @@ body {
 a {
   color: #00b7ff; }
 
-.home-page-content {
+.all-homepage-content {
   display: flex;
   justify-content: space-evenly;
   padding: 20px; }
+
+.greendiv {
+  background-color: #2edbaf;
+  height: 50vh;
+  position: absolute; }
 
 .login {
   text-align: center; }
@@ -239,7 +244,6 @@ footer {
   align-items: center;
   color: #4e6766;
   list-style-type: none;
-  font-weight: bold;
   padding: 0 20px;
   border-top: 2px solid #8888883b; }
 
@@ -259,5 +263,15 @@ footer ul li a:hover {
 
 .all-content {
   min-height: 100vh; }
+
+.folder-name {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+
+.total-user-content {
+  display: flex;
+  flex-direction: column; }
 
 /*# sourceMappingURL=style.css.map */

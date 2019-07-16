@@ -7,7 +7,7 @@ const folderSchema = new Schema(
     name: { type: String, required: true },
     is_public: { type: Boolean, default: true },
     owner: { type: Schema.Types.ObjectId, ref: "User" },
-    bookmarks: [{ type: Schema.Types.ObjectId, ref: "BookMark" }],
+    bookmarks: [{ type: Schema.Types.ObjectId, ref: "Bookmark" }],
     likes: [{ type: Schema.Types.ObjectId, ref: "User" }]
   },
   {

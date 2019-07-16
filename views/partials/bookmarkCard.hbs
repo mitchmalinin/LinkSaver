@@ -3,52 +3,52 @@
     <img class="activator" src="">
   </div>
   <div class="card-content">
-    <span class="card-title activator grey-text text-darken-4">{{this.title}}<i
+    <span class="card-title activator grey-text text-darken-4">{{bookmark.title}}<i
         class="material-icons right">more_vert</i></span>
     <div class="bookmark-options">
-      <a href="{{this.url}}" target="_blank">Visit {{this.title}}</a>
+      <a href="{{bookmark.url}}" target="_blank">Visit {{bookmark.title}}</a>
       <div class="edit-delete-buttons">
-        <a href="#/user/{{this._id}}" class="modal-trigger">
+        <a href="#/user/{{bookmark._id}}" class="modal-trigger">
           <button class="btn-floating btn-small waves-effect waves-light teal lighten">
             <i class="material-icons delete">edit</i>
           </button>
         </a>
-        <form action="/user/{{this._id}}/delete" method="POST">
+        <form action="/user/{{bookmark._id}}/delete" method="POST">
           <button class="btn-floating btn-small waves-effect waves-light red darken-1">
             <i class="material-icons delete">close</i>
           </button>
         </form>
       </div>
       {{!-- start of edit modal --}}
-      <div id="/user/{{this._id}}" class="modal">
+      <div id="/user/{{bookmark._id}}" class="modal">
         <div class="modal-content">
           <div class="bookmark-content">
             <h2>Update Bookmark</h2>
             <div class="row">
-              <form action="/user/{{this._id}}/update" class="col s12" method="POST">
+              <form action="/user/{{bookmark._id}}/update" class="col s12" method="POST">
                 <div class="row">
                   <div class="input-field col s12">
-                    <input name="url" type="text" class="validate" value="{{this.url}}">
+                    <input name="url" type="text" class="validate" value="{{bookmark.url}}">
                     <label>Url:</label>
                   </div>
                   <div class=" input-field col s12">
-                    <input name="title" type="text" class="validate" value="{{this.title}}">
+                    <input name="title" type="text" class="validate" value="{{bookmark.title}}">
                     <label>Title:</label>
                   </div>
                   <div class="input-field col s12">
-                    <input name="description" type="text" class="validate" value="{{this.description}}">
+                    <input name="description" type="text" class="validate" value="{{bookmark.description}}">
                     <label>Description:</label>
                   </div>
                   <div class="input-field col s12 dropdown-edit">
                     <select name="folder">
-                      {{#each folder}}
+                      {{#each folders}}
                       <option value="{{this._id}}">{{this.name}}</option>
                       {{/each}}
                     </select>
                   </div>
                   <div class="input-field col s12">
                     <div class="switch">
-                      {{#if this.is_public}}
+                      {{#if bookmark.is_public}}
                       <label>
                         public
                         <input id="isPublic" type="checkbox" name="is_public" value="false">
@@ -80,6 +80,6 @@
   </div>
   <div class="card-reveal">
     <span class="card-title grey-text text-darken-4">Description<i class="material-icons right">close</i></span>
-    <p>{{this.description}}</p>
+    <p>{{bookmark.description}}</p>
   </div>
 </div>
