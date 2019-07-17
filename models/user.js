@@ -11,8 +11,8 @@ const userSchema = new Schema(
     email: { type: mongoose.SchemaTypes.Email, required: true },
     my_bookmarks: { type: Schema.Types.ObjectId, ref: "BookMark" },
     fav_bookmarks: { type: Schema.Types.ObjectId, ref: "BookMark" },
-    followers: { type: Schema.Types.ObjectId, ref: "User" },
-    following: { type: Schema.Types.ObjectId, ref: "User" },
+    followers: [{ type: Schema.Types.ObjectId, ref: "User", default: 0 }],
+    following: [{ type: Schema.Types.ObjectId, ref: "User", default: 0 }],
     news_feed: {
       type: Schema.Types.ObjectId,
       ref: "BookMark",

@@ -119,8 +119,9 @@ nav a {
   color: #fff !important;
 }
 .sign-up-btn,
-.login-module-btn {
-  background-image: linear-gradient(to right, #2edbaf, #57e2e5);
+.login-module-btn,
+.edit-folder-module-btn {
+  background-image: linear-gradient(to right, #2edbaf, #57e2e5) !important;
   // background-image: linear-gradient(to right, #713afc, #57e2e5) !important;
   width: 100%;
   line-height: 0;
@@ -184,6 +185,10 @@ nav a {
 
 .bookmark-content {
   color: #4e6766;
+}
+
+.bookmark-content h2 {
+  margin-bottom: 20px;
 }
 
 //dashboard
@@ -336,7 +341,7 @@ footer ul li a:hover {
 }
 
 .folder-name {
-  padding: 20px;
+  padding: 0 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -345,4 +350,55 @@ footer ul li a:hover {
 .total-user-content {
   display: flex;
   flex-direction: column;
+  padding: 20px;
+  width: 100%;
+}
+
+.user-card {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+.user-card-all {
+  display: flex;
+  padding: 20px;
+  // background-color: rgba(226, 226, 226, 0.144);
+  color: #4e6766;
+  width: 50%;
+  justify-content: space-evenly;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.14);
+  border-radius: 5px;
+}
+
+.user-card-all h3,
+h4 {
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.user-card-all .card-img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-position: center;
+  background-size: cover;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
+}
+
+.user-card-all .social-info a:first-child {
+  margin-right: 10px;
+}
+
+.user-card-all .social-info a {
+  color: #2edbaf;
+}
+
+.private-bookmarks {
+  padding: 30px 50px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 300px);
+  grid-gap: 30px;
+  grid-auto-rows: 330px;
+  // align-items: center;
+  justify-content: center !important;
 }

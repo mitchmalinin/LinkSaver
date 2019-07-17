@@ -24,6 +24,8 @@ router.post("/sign-up", (req, res, next) => {
   const email = req.body.email;
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
+  const followers = req.body.followers;
+  const following = req.body.following;
 
   if (
     userName === "" ||
@@ -53,7 +55,9 @@ router.post("/sign-up", (req, res, next) => {
           password: hashedPassWord,
           email: email,
           firstName: firstName,
-          lastName: lastName
+          lastName: lastName,
+          followers: followers,
+          following: following
         })
           .then(userDB => {
             console.log("Test");
@@ -147,7 +151,7 @@ router.get("/homepage", ensureLogin.ensureLoggedIn("/"), (req, res, next) => {
       Folder.find({ owner: req.user._id })
         .then(folders => {
           // req.theFolders = folders;
-          console.log("req folders =============== ", req.theFolders);
+
           // next();
           res.render("homepage", { bookmark, user: data, folders });
         })
@@ -181,33 +185,62 @@ router.post("/save-bookmark", (req, res, next) => {
     return;
   }
 
-  Bookmark.find({ url: url, owner: user._id }).then(foundUrl => {
-    console.log(foundUrl);
-    if (foundUrl !== null && foundUrl.owner === user._id) {
-      req.flash("error", "You already have this url saved");
-      res.redirect("/user/homepage");
-      return;
-    } else {
-      Bookmark.create({
-        title: title,
-        url: url,
-        description: description,
-        is_public: isPublic,
-        owner: user._id,
-        folder: folder
-      })
-        .then(bookmark => {
-          console.log("Test");
-          // console.table(bookmark);
-          req.flash("success", "Bookmark added");
-          res.redirect("/user/homepage");
+  if (folder == "") {
+    Bookmark.find({ url: url, owner: user._id }).then(foundUrl => {
+      console.log(foundUrl);
+      if (foundUrl !== null && foundUrl.owner === user._id) {
+        req.flash("error", "You already have this url saved");
+        res.redirect("/user/homepage");
+        return;
+      } else {
+        Bookmark.create({
+          title: title,
+          url: url,
+          description: description,
+          is_public: isPublic,
+          owner: user._id
         })
-        .catch(err => {
-          console.log("Didnt work");
-          next(err);
-        });
-    }
-  });
+          .then(bookmark => {
+            console.log("Test");
+            // console.table(bookmark);
+            req.flash("success", "Bookmark added");
+            res.redirect("/user/homepage");
+          })
+          .catch(err => {
+            console.log("Didnt work");
+            next(err);
+          });
+      }
+    });
+  } else {
+    Bookmark.find({ url: url, owner: user._id }).then(foundUrl => {
+      console.log(foundUrl);
+      if (foundUrl !== null && foundUrl.owner === user._id) {
+        req.flash("error", "You already have this url saved");
+        res.redirect("/user/homepage");
+        return;
+      } else {
+        Bookmark.create({
+          title: title,
+          url: url,
+          description: description,
+          is_public: isPublic,
+          owner: user._id,
+          folder: folder
+        })
+          .then(bookmark => {
+            console.log("Test");
+            // console.table(bookmark);
+            req.flash("success", "Bookmark added");
+            res.redirect("/user/homepage");
+          })
+          .catch(err => {
+            console.log("Didnt work");
+            next(err);
+          });
+      }
+    });
+  }
 });
 
 router.post("/:id/delete", async (req, res, next) => {
@@ -263,25 +296,44 @@ router.post("/:id/update", (req, res, next) => {
   let url = req.body.url;
   let description = req.body.description;
   let is_public = req.body.is_public;
+  let folder = req.body.folder;
 
   if (is_public == null) {
     is_public = true;
   }
 
-  const data = {
-    title,
-    url,
-    description,
-    is_public
-  };
-  Bookmark.findByIdAndUpdate(req.params.id, data)
-    .then(() => {
-      req.flash("success", "Bookmark updated");
-      res.redirect("/user/homepage");
-    })
-    .catch(err => {
-      next(err);
-    });
+  if (folder == "") {
+    const data = {
+      title,
+      url,
+      description,
+      is_public
+    };
+    Bookmark.findByIdAndUpdate(req.params.id, data)
+      .then(() => {
+        req.flash("success", "Bookmark updated");
+        res.redirect("/user/homepage");
+      })
+      .catch(err => {
+        next(err);
+      });
+  } else {
+    const data = {
+      title,
+      url,
+      description,
+      is_public,
+      folder
+    };
+    Bookmark.findByIdAndUpdate(req.params.id, data)
+      .then(() => {
+        req.flash("success", "Bookmark updated");
+        res.redirect("/user/homepage");
+      })
+      .catch(err => {
+        next(err);
+      });
+  }
 });
 
 //making folders
@@ -357,4 +409,40 @@ router.get("/folder/:id", async (req, res, next) => {
   //   });
 });
 
+router.get("/profile", async (req, res, next) => {
+  let user = req.user;
+  let followers = req.user.followers;
+  let following = req.user.following;
+
+  if (followers.length == undefined) {
+    followers.length = 0;
+  }
+  if (following.length == undefined) {
+    following.length = 0;
+  }
+  console.log("=-=--=-User-=-=--", user);
+  try {
+    const folders = await Folder.find({ owner: req.user._id });
+    const bookmarks = await Bookmark.find({ owner: req.user._id });
+    const privateBookmarks = await Bookmark.find({
+      owner: req.user._id,
+      is_public: false
+    });
+    const privateFolder = await Folder.find({
+      owner: req.user._id,
+      is_public: false
+    });
+    res.render("profile", {
+      user,
+      folders,
+      bookmarks,
+      followers,
+      following,
+      privateBookmarks,
+      privateFolder
+    });
+  } catch (error) {
+    next(error);
+  }
+});
 module.exports = router;

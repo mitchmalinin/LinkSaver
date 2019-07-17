@@ -1,29 +1,29 @@
 <div class="card">
-  <div class="card-image waves-effect waves-block waves-light">
-    <img class="activator" src="">
-  </div>
+  <a href="/user/folder/{{this._id}}">
+    <div class="card-image waves-effect waves-block waves-light">
+
+    </div>
+  </a>
   <div class="card-content">
-    <span class="card-title activator grey-text text-darken-4">{{bookmark.title}}<i
-        class="material-icons right">more_vert</i></span>
+    <span class="card-title activator grey-text text-darken-4">{{this.name}}</span>
     <div class="bookmark-options">
-      <a href="{{bookmark.url}}" target="_blank">Visit {{bookmark.title}}</a>
       <div class="edit-delete-buttons">
-        <a href="#/user/{{bookmark._id}}" class="modal-trigger">
+        <a href="#/user/{{this._id}}" class="modal-trigger">
           <button class="btn-floating btn-small waves-effect waves-light teal lighten">
             <i class="material-icons delete">edit</i>
           </button>
         </a>
-        <form action="/user/{{bookmark._id}}/delete" method="POST">
+        <form action="/user/{{this._id}}/delete" method="POST">
           <button class="btn-floating btn-small waves-effect waves-light red darken-1">
             <i class="material-icons delete">close</i>
           </button>
         </form>
       </div>
       {{!-- start of edit modal --}}
-      <div id="/user/{{bookmark._id}}" class="modal">
+      <div id="/user/{{this._id}}" class="modal">
         <div class="modal-content">
           <div class="bookmark-content">
-            <h2>Update Bookmark</h2>
+            <h2>Update folder</h2>
             <div class="row">
               <form action="/user/{{bookmark._id}}/update" class="col s12" method="POST">
                 <div class="row">
@@ -41,7 +41,6 @@
                   </div>
                   <div class="input-field col s12 dropdown-edit">
                     <select name="folder">
-                      <option value="">Favorites</option>
                       {{#each folders}}
                       <option value="{{this._id}}">{{this.name}}</option>
                       {{/each}}
@@ -78,9 +77,5 @@
       </div>
       {{!-- end of edit modal --}}
     </div>
-  </div>
-  <div class="card-reveal">
-    <span class="card-title grey-text text-darken-4">Description<i class="material-icons right">close</i></span>
-    <p>{{bookmark.description}}</p>
   </div>
 </div>

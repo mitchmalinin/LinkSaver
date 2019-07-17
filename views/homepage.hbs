@@ -1,45 +1,7 @@
 {{> nav}}
 <div class="dashboard">
-  <div class="sidebar">
-    {{#if msg}}
-    <p class='error'>
-      {{msg}}
-    </p>
-    {{/if}}
-    {{#if success}}
-    <p class='success'>
-      {{success}}
-    </p>
-    {{/if}}
-    <h2>Link Saver</h2>
-    <div class="add-btn-container">
-      <a class="waves-effect waves-light btn modal-trigger add-bookmark user-btn" href="#modal2">Add Bookmark</a>
-      <a class="waves-effect waves-light btn modal-trigger create-group user-btn" href="#modal3">Add Folder</a>
-    </div>
-    <h5>Folders</h5>
-    <div class="all-folders">
-      {{#each folders}}
-      <a class="waves-effect waves-light btn modal-trigger create-group folder"
-        href="/user/folder/{{this._id}}">{{this.name}}</a>
-      {{/each}}
-    </div>
-    <div id="modal2" class="modal">
-      <div class="modal-content">
-        {{> bookmark}}
-      </div>
-      <div class="modal-footer">
-        <a href="#modal2" class="modal-close waves-effect waves-green btn-flat">close</a>
-      </div>
-    </div>
-    <div id="modal3" class="modal">
-      <div class="modal-content">
-        {{> folder}}
-      </div>
-      <div class="modal-footer">
-        <a href="#modal3" class="modal-close waves-effect waves-green btn-flat">close</a>
-      </div>
-    </div>
-  </div>
+  {{>sidebar}}
+  {{!-- all the user content on main display --}}
   <div class="total-user-content">
     <div class="folder-name">
       <div class="folder-title">
@@ -47,7 +9,7 @@
         <h2>{{oneFolder.name}}</h2>
       </div>
       <div class="edit-delete-buttons">
-        <a href="#/folder/{{oneFolder._id}}" class="modal-trigger">
+        <a href="#{{oneFolder._id}}" class="modal-trigger">
           <button class="btn-floating btn-small waves-effect waves-light teal lighten">
             <i class="material-icons delete">add</i>
           </button>
@@ -90,7 +52,7 @@
                       </div>
                     </div>
                   </div>
-                  <button class="waves-effect waves-light btn-large login-module-btn">Save</button>
+                  <button class="waves-effect waves-light btn-large edit-folder-module-btn">Save</button>
                 </form>
               </div>
             </div>
@@ -109,7 +71,6 @@
       </div>
     </div>
     <div class="user-content">
-
       {{#each bookmark}}
       {{> bookmarkCard bookmark = this folders=../folders}}
       {{/each}}

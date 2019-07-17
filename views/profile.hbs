@@ -1,0 +1,34 @@
+{{>nav}}
+
+
+{{!-- all the user content on main display --}}
+<div class="total-user-content">
+  <div class="user-card">
+    <div class="user-card-all">
+      <div class="card-img" style="background-image: url('/images/me.png')">
+      </div>
+      <div class="user-card-info">
+        <label for="">Name:</label>
+        <h3>{{user.firstName}} <span>{{user.lastName}}</span></h3>
+        <label for="">Username:</label>
+        <h4>{{user.username}}</h4>
+        <div class="social-info">
+          <a href="">Following: {{following.length}}</a>
+          <a href="">Followers: {{followers.length}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h5>Private Bookmarks: </h5>
+  <div class="private-bookmarks">
+    {{#each privateBookmarks}}
+    {{> bookmarkCard bookmark = this folders=../folders}}
+    {{/each}}
+  </div>
+  <h5>Private Folders: </h5>
+  <div class="private-bookmarks">
+    {{#each privateFolder}}
+    {{> folderCard}}
+    {{/each}}
+  </div>
+</div>

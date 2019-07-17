@@ -114,7 +114,6 @@ app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
 app.locals.title = "Express - Generated with IronGenerator";
 
 app.use((req, res, next) => {
-  console.log("------------ req . theFolders ----------------", req.theFolders);
   if (res.theFolders) {
     res.locals.theFolders = req.theFolders;
   }
@@ -126,6 +125,9 @@ app.use("/", index);
 
 const user = require("./routes/user");
 app.use("/user", user);
+
+const newsFeed = require("./routes/newsfeed");
+app.use("/news-feed", newsFeed);
 
 //partials
 
