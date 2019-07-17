@@ -25,7 +25,7 @@ a {
 
 .login-signup-buttons {
   width: 25%;
-  box-shadow: 1px 1px 8px #888888;
+  box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.14);
   padding: 20px;
   margin-top: 50px;
   margin-bottom: 50px; }
@@ -320,5 +320,8 @@ h4 {
   grid-gap: 30px;
   grid-auto-rows: 330px;
   justify-content: center !important; }
+
+.user-card h5 {
+  padding: 0 50px; }
 
 /*# sourceMappingURL=style.css.map */

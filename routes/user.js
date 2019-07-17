@@ -60,11 +60,21 @@ router.post("/sign-up", (req, res, next) => {
           following: following
         })
           .then(userDB => {
-            console.log("Test");
+            // console.log("Test");
             console.log(data);
             req.user = userDB;
-            req.flash("success", "Account created, you can now login!");
-            res.redirect("/");
+            Folder.create({
+              name: "favorites",
+              is_public: true,
+              owner: userDB._id
+            })
+              .then(() => {
+                req.flash("success", "Account created, you can now login!");
+                res.redirect("/");
+              })
+              .catch(err => {
+                next(err);
+              });
           })
           .catch(err => {
             console.log("Didnt work");
@@ -145,7 +155,7 @@ router.post("/logout", (req, res) => {
 
 router.get("/homepage", ensureLogin.ensureLoggedIn("/"), (req, res, next) => {
   let data = req.user;
-  console.log(data);
+
   Bookmark.find({ owner: req.user._id })
     .then(bookmark => {
       Folder.find({ owner: req.user._id })
@@ -170,77 +180,47 @@ router.get("/homepage", ensureLogin.ensureLoggedIn("/"), (req, res, next) => {
 router.post("/save-bookmark", (req, res, next) => {
   let data = req.body;
   let user = req.user;
-  console.log("=-=-----=---=-=-", user);
 
   const title = req.body.title;
-  const url = req.body.url;
+  const userUrl = req.body.url;
   const description = req.body.description;
   let isPublic = req.body.is_public;
   const folder = req.body.folder;
-  console.log("=-=-=-=-=-=-=-=-=-=-=-=-", req.body.folder);
 
-  if (title === "" || url === "") {
+  if (title === "" || userUrl === "") {
     req.flash("error", "Missing values");
     res.redirect("/user/homepage");
     return;
   }
 
-  if (folder == "") {
-    Bookmark.find({ url: url, owner: user._id }).then(foundUrl => {
-      console.log(foundUrl);
-      if (foundUrl !== null && foundUrl.owner === user._id) {
-        req.flash("error", "You already have this url saved");
-        res.redirect("/user/homepage");
-        return;
-      } else {
-        Bookmark.create({
-          title: title,
-          url: url,
-          description: description,
-          is_public: isPublic,
-          owner: user._id
+  Bookmark.find({ url: userUrl, owner: user._id }).then(foundUrl => {
+    console.log("=-==-=--found-=-==-=-=-", foundUrl);
+    if (foundUrl.length == 0) {
+      console.log("this is no empty");
+      Bookmark.create({
+        title: title,
+        url: userUrl,
+        description: description,
+        is_public: isPublic,
+        owner: user._id,
+        folder: folder
+      })
+        .then(bookmark => {
+          // console.table(bookmark);
+          req.flash("success", "Bookmark added");
+          res.redirect("/user/homepage");
         })
-          .then(bookmark => {
-            console.log("Test");
-            // console.table(bookmark);
-            req.flash("success", "Bookmark added");
-            res.redirect("/user/homepage");
-          })
-          .catch(err => {
-            console.log("Didnt work");
-            next(err);
-          });
-      }
-    });
-  } else {
-    Bookmark.find({ url: url, owner: user._id }).then(foundUrl => {
-      console.log(foundUrl);
-      if (foundUrl !== null && foundUrl.owner === user._id) {
-        req.flash("error", "You already have this url saved");
-        res.redirect("/user/homepage");
-        return;
-      } else {
-        Bookmark.create({
-          title: title,
-          url: url,
-          description: description,
-          is_public: isPublic,
-          owner: user._id,
-          folder: folder
-        })
-          .then(bookmark => {
-            console.log("Test");
-            // console.table(bookmark);
-            req.flash("success", "Bookmark added");
-            res.redirect("/user/homepage");
-          })
-          .catch(err => {
-            console.log("Didnt work");
-            next(err);
-          });
-      }
-    });
-  }
+        .catch(err => {
+          console.log("Didnt work");
+          next(err);
+        });
+    } else {
+      req.flash("error", "You already have this url saved");
+      res.redirect("/user/homepage");
+      return;
+    }
+  });
+  //
 });
 
 router.post("/:id/delete", async (req, res, next) => {

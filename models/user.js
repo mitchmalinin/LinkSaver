@@ -10,6 +10,7 @@ const userSchema = new Schema(
     password: { type: String, required: true },
     email: { type: mongoose.SchemaTypes.Email, required: true },
     my_bookmarks: { type: Schema.Types.ObjectId, ref: "BookMark" },
+    // my_folders: { type: Schema.Types.ObjectId, ref: "Folder" },
     fav_bookmarks: { type: Schema.Types.ObjectId, ref: "BookMark" },
     followers: [{ type: Schema.Types.ObjectId, ref: "User", default: 0 }],
     following: [{ type: Schema.Types.ObjectId, ref: "User", default: 0 }],
