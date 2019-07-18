@@ -355,12 +355,12 @@ footer ul li a:hover {
   width: 100%;
 }
 
-.user-card {
+.one-user-card {
   margin-top: 20px;
   display: flex;
   justify-content: center;
 }
-.user-card-all {
+.user-card-single {
   display: flex;
   padding: 20px;
   // background-color: rgba(226, 226, 226, 0.144);
@@ -371,13 +371,13 @@ footer ul li a:hover {
   border-radius: 5px;
 }
 
-.user-card-all h3,
+.user-card-single h3,
 h4 {
   margin: 0;
   margin-bottom: 20px;
 }
 
-.user-card-all .card-img {
+.user-card-single .card-img {
   width: 200px;
   height: 200px;
   border-radius: 50%;
@@ -386,11 +386,11 @@ h4 {
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
 }
 
-.user-card-all .social-info a:first-child {
+.user-card-single .social-info a:first-child {
   margin-right: 10px;
 }
 
-.user-card-all .social-info a {
+.user-card-single .social-info a {
   color: #2edbaf;
 }
 
@@ -404,6 +404,58 @@ h4 {
   justify-content: center !important;
 }
 
-.user-card h5 {
+.one-user-card h5 {
   padding: 0 50px;
+}
+
+//search
+.search-content {
+  padding: 20px;
+}
+
+.search-content h3 {
+}
+
+.user-card-all {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-card .card-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-position: center;
+  background-size: cover;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
+}
+
+.user-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
+  border-radius: 5px;
+  background-color: #4e6766;
+  color: #fff;
+}
+
+.user-names {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.card-content {
+  width: 100%;
+  padding: 0 10px;
+}
+
+.folder-img {
+  background-color: #2edbaf;
+  height: 150px;
 }

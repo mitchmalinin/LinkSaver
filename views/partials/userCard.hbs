@@ -1,0 +1,34 @@
+{{!-- <div class="user-card">
+  <div class="user-card-all">
+    <div class="card-img" style="background-image: url('/images/me.png')">
+    </div>
+    <div class="user-card-info">
+      <label for="">Name:</label>
+      <h3>{{this.firstName}} <span>{{this.lastName}}</span></h3>
+      <label for="">Username:</label>
+      <h4>{{this.username}}</h4>
+      <div class="social-info">
+        <a href="">Following: {{following.length}}</a>
+        <a href="">Followers: {{followers.length}}</a>
+      </div>
+    </div>
+  </div>
+</div> --}}
+
+<div class="card">
+  <div class="card-image waves-effect waves-block waves-light">
+    <img class="activator" src="/images/me.png">
+  </div>
+  <div class="card-content">
+    <span class="card-title activator grey-text text-darken-4">{{this.firstName}} {{this.lastName}}<i
+        class="material-icons right">more_vert</i></span>
+    <div class="bookmark-options">
+      <a href="/user/{{this._id}}" target="_blank">Go to {{this.username}}'s profile</a>
+    </div>
+  </div>
+  <div class="card-reveal">
+    <span class="card-title grey-text text-darken-4">More Info:<i class="material-icons right">close</i></span>
+    <h6>Followers: {{this.followers.length}}</h6>
+    <h6>Following: {{this.following.length}}</h6>
+  </div>
+</div>

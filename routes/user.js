@@ -85,49 +85,6 @@ router.post("/sign-up", (req, res, next) => {
     .catch(err => next(err));
 });
 
-//passport sign up
-// For Signup
-// passport.use(
-//   "local-signup",
-//   new LocalStrategy(
-//     {
-//       passReqToCallback: true
-//     },
-//     async function(req, username, password, done) {
-//       const { firstName, lastName, email } = req.body;
-
-//       try {
-//         const userDB = await User.findOne({
-//           $or: [{ email }, { username }]
-//         }).exec();
-
-//         if (userDB) {
-//           if (userDB.username === username && userDB.email === email) {
-//             return done(null, false, req.flash("wrongEmailAndUsername", true));
-//           } else if (userDB.username === username) {
-//             return done(null, false, req.flash("wrongUsername", true));
-//           } else if (userDB.email === email) {
-//             return done(null, false, req.flash("wrongEmail", true));
-//           }
-//         } else {
-//           const salt = bcrypt.genSaltSync(12);
-//           const hashedPassWord = bcrypt.hashSync(password, salt);
-//           let newUser = new User();
-//           newUser.name = name;
-//           newUser.username = username;
-//           newUser.email = email;
-//           newUser.password = hashedPassWord;
-
-//           await newUser.save();
-//           return done(null, newUser);
-//         }
-//       } catch (err) {
-//         console.log(err);
-//       }
-//     }
-//   )
-// );
-
 // For Login
 router.post(
   "/login",
@@ -362,31 +319,6 @@ router.get("/folder/:id", async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-
-  // Folder.findById(req.params.id)
-  //   .then(oneFolder => {
-  //     Bookmark.find({ owner: req.user._id, folder: oneFolder._id })
-  //       .then(bookmark => {
-  //         Folder.find()
-  //           .then(folder => {
-  //             res.render("homepage", {
-  //               user: data,
-  //               oneFolder: oneFolder,
-  //               bookmark,
-  //               folder
-  //             });
-  //           })
-  //           .catch(err => {
-  //             next(err);
-  //           });
-  //       })
-  //       .catch(err => {
-  //         next(err);
-  //       });
-  //   })
-  //   .catch(err => {
-  //     next(err);
-  //   });
 });
 
 router.get("/profile", async (req, res, next) => {
@@ -423,6 +355,33 @@ router.get("/profile", async (req, res, next) => {
     });
   } catch (error) {
     next(error);
+  }
+});
+
+//search
+
+router.post("/search", async (req, res, next) => {
+  let userSearch = req.body.search;
+  let user = req.user;
+  try {
+    const foundBookMarks = await Bookmark.find({
+      title: userSearch,
+      owner: req.user._id
+    });
+    const foundFolders = await Folder.find({
+      name: userSearch,
+      owner: req.user._id
+    });
+    const foundUsers = await User.find({ username: userSearch });
+    const data = {
+      foundBookMarks,
+      foundFolders,
+      userSearch,
+      foundUsers
+    };
+    res.render("search", { data, user });
+  } catch (error) {
+    next(err);
   }
 });
 module.exports = router;

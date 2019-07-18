@@ -1,0 +1,22 @@
+{{>nav}}
+<div class="search-content">
+  <h3>Matching Results for: {{data.userSearch}}</h3>
+  <h5> Bookmarks: </h5>
+  <div class="private-bookmarks">
+    {{#each data.foundBookMarks}}
+    {{> bookmarkCard bookmark = this folders=../folders}}
+    {{/each}}
+  </div>
+  <h5>Folders: </h5>
+  <div class="private-bookmarks">
+    {{#each data.foundFolders}}
+    {{> folderCard}}
+    {{/each}}
+  </div>
+  <h5>Users: </h5>
+  <div class="private-bookmarks">
+    {{#each data.foundUsers}}
+    {{> userCard}}
+    {{/each}}
+  </div>
+</div>
