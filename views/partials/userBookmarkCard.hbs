@@ -1,0 +1,80 @@
+<div class="card">
+  <div class="card-image waves-effect waves-block waves-light">
+    <img class="activator" src="">
+  </div>
+  <div class="card-content">
+    <span class="card-title activator grey-text text-darken-4">{{bookmark.title}}<i
+        class="material-icons right">more_vert</i></span>
+    <div class="bookmark-options">
+      <a href="{{bookmark.url}}" target="_blank">Visit {{bookmark.title}}</a>
+      <div class="save-button">
+        <a href="#/user/{{bookmark._id}}" class="modal-trigger">
+          <button class="add-user-bookmark btn-floating btn-small waves-effect waves-light">
+            <i class="material-icons delete">add</i>
+          </button>
+        </a>
+      </div>
+      {{!-- start of edit modal --}}
+      <div id="/user/{{bookmark._id}}" class="modal">
+        <div class="modal-content">
+          <div class="bookmark-content">
+            <h2>Save Bookmark</h2>
+            <div class="row">
+              <form action="/user/save-bookmark" class="col s12" method="POST">
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input name="url" type="text" class="validate" value="{{bookmark.url}}">
+                    <label>Url:</label>
+                  </div>
+                  <div class=" input-field col s12">
+                    <input name="title" type="text" class="validate" value="{{bookmark.title}}">
+                    <label>Title:</label>
+                  </div>
+                  <div class="input-field col s12">
+                    <input name="description" type="text" class="validate" value="{{bookmark.description}}">
+                    <label>Description:</label>
+                  </div>
+                  <div class="input-field col s12 dropdown-edit">
+                    <select name="folder">
+                      {{#each folders}}
+                      <option value="{{this._id}}">{{this.name}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                  <div class="input-field col s12">
+                    <div class="switch">
+                      {{#if bookmark.is_public}}
+                      <label>
+                        public
+                        <input id="isPublic" type="checkbox" name="is_public" value="false">
+                        <span class="lever"></span>
+                        private
+                      </label>
+                      {{else}}
+                      <label>
+                        public
+                        <input id="isPublic" type="checkbox" name="is_public" value="false" checked="true">
+                        <span class="lever"></span>
+                        private
+                      </label>
+                      {{/if}}
+                    </div>
+                  </div>
+                </div>
+                <button class="waves-effect waves-light btn-large login-module-btn">Save</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a href="#modal3" class="modal-close waves-effect waves-green btn-flat">close</a>
+        </div>
+      </div>
+      {{!-- end of edit modal --}}
+    </div>
+  </div>
+  <div class="card-reveal">
+    <span class="card-title grey-text text-darken-4">Description<i class="material-icons right">close</i></span>
+    <p>{{bookmark.description}}</p>
+  </div>
+</div>

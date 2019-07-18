@@ -272,7 +272,70 @@ router.post("/:id/update", (req, res, next) => {
       });
   }
 });
+//my profile
+router.get("/profile", async (req, res, next) => {
+  let user = req.user;
+  let followers = req.user.followers;
+  let following = req.user.following;
 
+  if (followers.length == undefined) {
+    followers.length = 0;
+  }
+  if (following.length == undefined) {
+    following.length = 0;
+  }
+  console.log("=-=--=-User-=-=--", user);
+  try {
+    const folders = await Folder.find({ owner: req.user._id });
+    const bookmarks = await Bookmark.find({ owner: req.user._id });
+    const privateBookmarks = await Bookmark.find({
+      owner: req.user._id,
+      is_public: false
+    });
+    const privateFolder = await Folder.find({
+      owner: req.user._id,
+      is_public: false
+    });
+    res.render("profile", {
+      user,
+      folders,
+      bookmarks,
+      followers,
+      following,
+      privateBookmarks,
+      privateFolder
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+//showing user profile
+router.get("/:id", async (req, res, next) => {
+  let user = req.user;
+
+  try {
+    let userInfo = await User.findById(req.params.id);
+    let folders = await Folder.find({ owner: req.user._id });
+    let userFolders = await Folder.find({
+      is_public: true,
+      owner: req.params.id
+    });
+    let userBookmarks = await Bookmark.find({
+      is_public: true,
+      owner: req.params.id
+    });
+
+    let data = {
+      userInfo,
+      userFolders,
+      userBookmarks
+    };
+    console.log("=-=-=User Bookmarks-=-", userBookmarks);
+    res.render("userProfile", { user, folders, data });
+  } catch (err) {
+    next(err);
+  }
+});
 //making folders
 
 router.post("/create-folder", async (req, res, next) => {
@@ -321,49 +384,14 @@ router.get("/folder/:id", async (req, res, next) => {
   }
 });
 
-router.get("/profile", async (req, res, next) => {
-  let user = req.user;
-  let followers = req.user.followers;
-  let following = req.user.following;
-
-  if (followers.length == undefined) {
-    followers.length = 0;
-  }
-  if (following.length == undefined) {
-    following.length = 0;
-  }
-  console.log("=-=--=-User-=-=--", user);
-  try {
-    const folders = await Folder.find({ owner: req.user._id });
-    const bookmarks = await Bookmark.find({ owner: req.user._id });
-    const privateBookmarks = await Bookmark.find({
-      owner: req.user._id,
-      is_public: false
-    });
-    const privateFolder = await Folder.find({
-      owner: req.user._id,
-      is_public: false
-    });
-    res.render("profile", {
-      user,
-      folders,
-      bookmarks,
-      followers,
-      following,
-      privateBookmarks,
-      privateFolder
-    });
-  } catch (error) {
-    next(error);
-  }
-});
-
 //search
 
 router.post("/search", async (req, res, next) => {
   let userSearch = req.body.search;
   let user = req.user;
+
   try {
+    const folders = await Folder.find({ owner: req.user._id });
     const foundBookMarks = await Bookmark.find({
       title: userSearch,
       owner: req.user._id
@@ -372,15 +400,18 @@ router.post("/search", async (req, res, next) => {
       name: userSearch,
       owner: req.user._id
     });
-    const foundUsers = await User.find({ username: userSearch });
+    const foundUsers = await User.find({
+      $and: [{ username: userSearch }, { username: { $ne: user.username } }]
+    });
     const data = {
       foundBookMarks,
       foundFolders,
       userSearch,
       foundUsers
     };
-    res.render("search", { data, user });
-  } catch (error) {
+    console.log("=-=-=-=-=-=folders=-=-=-", folders);
+    res.render("search", { data, user, folders });
+  } catch (err) {
     next(err);
   }
 });

@@ -9,22 +9,17 @@
       <div class="folder-edit-delete-buttons ">
         <a href="#/user/folder/{{this._id}}" class="modal-trigger">
           <button class="folder-btns">
-            <i class="material-icons delete">edit</i>
+            <i class="material-icons delete">add</i>
           </button>
         </a>
-        <form action="/user/folder/{{this._id}}/delete" method="POST">
-          <button class="folder-btns red ">
-            <i class="material-icons delete">close</i>
-          </button>
-        </form>
       </div>
       {{!-- start of edit modal --}}
       <div id="/user/folder/{{this._id}}" class="modal">
         <div class="modal-content">
           <div class="this-content">
-            <h3>Update Folder</h3>
+            <h3>Add Folder</h3>
             <div class="row">
-              <form action="/user/folder/{{this._id}}/update" class="col s12" method="POST">
+              <form action="/user/create-folder" class="col s12" method="POST">
                 <div class="row">
                   <div class=" input-field col s12">
                     <input name="name" type="text" class="validate" value="{{this.name}}">

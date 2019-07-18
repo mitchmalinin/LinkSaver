@@ -1,6 +1,7 @@
 {{>nav}}
 <div class="dashboard">
   {{>sidebar}}
+  {{!-- all the user content on main display --}}
   <div class="total-user-content">
     <div class="one-user-card">
       <div class="user-card-single">
@@ -8,29 +9,28 @@
         </div>
         <div class="user-card-info">
           <label for="">Name:</label>
-          <h3>{{user.firstName}} <span>{{user.lastName}}</span></h3>
+          <h3>{{data.userInfo.firstName}} <span>{{data.userInfo.lastName}}</span></h3>
           <label for="">Username:</label>
-          <h4>{{user.username}}</h4>
+          <h4>{{data.userInfo.username}}</h4>
           <div class="social-info">
-            <a href="">Following: {{following.length}}</a>
-            <a href="">Followers: {{followers.length}}</a>
+            <a href="">Following: {{data.userInfo.following.length}}</a>
+            <a href="">Followers: {{data.userInfo.followers.length}}</a>
           </div>
         </div>
       </div>
     </div>
-    <h5>Private Bookmarks: </h5>
+    <h5>Public Bookmarks: </h5>
     <div class="private-bookmarks">
-      {{#each privateBookmarks}}
-      {{> bookmarkCard bookmark = this folders=../folders}}
+      {{#each data.userBookmarks}}
+      {{> userBookmarkCard  bookmark= this folders=../folders}}
       {{/each}}
     </div>
-    <h5>Private Folders: </h5>
+    <h5>Public Folders: </h5>
     <div class="private-folders">
-      {{#each privateFolder}}
-      {{> folderCard}}
+      {{#each data.userFolders}}
+      {{> userFolderCard}}
       {{/each}}
     </div>
+
   </div>
 </div>
-
-{{!-- all the user content on main display --}}

@@ -14,15 +14,31 @@ a {
 .all-homepage-content {
   display: flex;
   justify-content: space-evenly;
-  padding: 20px;
+  padding: 0 50px;
 }
 
-.greendiv {
-  background-color: #2edbaf;
-  height: 50vh;
-  position: absolute;
+.home-page-content {
+  background: linear-gradient(
+    286deg,
+    rgba(255, 255, 255, 1) 48%,
+    rgba(46, 219, 175, 1) 48%
+  );
 }
 
+.welcome {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.welcome p {
+  font-size: 20px;
+}
+
+.welcome img {
+  margin-top: 50px;
+  width: 100%;
+}
 .login {
   text-align: center;
 }
@@ -32,7 +48,7 @@ a {
 }
 
 .login-signup-buttons {
-  width: 25%;
+  width: 27%;
   // box-shadow: 1px 1px 8px #888888;
   box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.14);
   padding: 20px;
@@ -100,12 +116,47 @@ nav {
   padding: 0 !important;
   width: 20%;
 }
-
+//form fill
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: none;
+  -webkit-text-fill-color: #4e6766;
+  -webkit-box-shadow: none;
+  transition: background-color 5000s ease-in-out 0s;
+  font-size: 16px;
+}
 nav a {
   background-color: transparent !important;
   color: #fff !important;
   padding: 0 20px !important;
   font-size: 20px !important;
+}
+
+nav input:-webkit-autofill,
+nav input:-webkit-autofill:hover,
+nav input:-webkit-autofill:focus,
+nav textarea:-webkit-autofill,
+nav textarea:-webkit-autofill:hover,
+nav textarea:-webkit-autofill:focus,
+nav select:-webkit-autofill,
+nav select:-webkit-autofill:hover,
+nav select:-webkit-autofill:focus {
+  border: none;
+  -webkit-text-fill-color: #fff;
+  -webkit-box-shadow: 0 0 0px 100px #713afc inset !important;
+  transition: background-color 5000s ease-in-out 0s;
+  font-size: 16px;
+}
+nav input {
+  color: #fff;
+  background-color: transparent;
 }
 .nav-wrapper {
   background-color: transparent !important;
@@ -220,6 +271,7 @@ nav a {
   justify-content: center !important;
 }
 .user-btn {
+  // background-image: linear-gradient(to right, #713afc, #a682ff) !important;
   background-image: linear-gradient(to right, #2edbaf, #57e2e5);
   // background-image: linear-gradient(to right, #713afc, #57e2e5) !important;
   // background-image: linear-gradient(to right, #a682ff, #713afc) !important;
@@ -299,6 +351,7 @@ nav a {
 }
 .folder {
   background-image: linear-gradient(to right, #713afc, #a682ff) !important;
+  // background-image: linear-gradient(to right, #2edbaf, #57e2e5);
   width: 100% !important;
   margin: 10px 0;
   border-radius: 5px;
@@ -455,7 +508,58 @@ h4 {
   padding: 0 10px;
 }
 
-.folder-img {
-  background-color: #2edbaf;
-  height: 150px;
+.private-folders {
+  padding: 30px 50px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 300px);
+  grid-gap: 30px;
+  grid-auto-rows: 200px;
+  // align-items: center;
+  justify-content: center !important;
+}
+
+.folder-card .card-image {
+  background-color: #fff !important;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #4e6766;
+}
+
+.folder-card {
+  border-radius: 5px !important;
+}
+
+.folder-card .card-content {
+  background-color: #4e6766;
+  border-radius: 0 0 5px 5px !important;
+}
+
+.folder-edit-delete-buttons {
+  justify-content: center;
+  display: flex;
+}
+
+.folder-edit-delete-buttons button {
+  margin: 0 20px;
+}
+
+.folder-edit-delete-buttons button {
+  background-color: #57e2e5 !important;
+}
+
+.folder-edit-delete-buttons .red {
+  background-color: #a682ff !important;
+}
+
+.folder-btns {
+  border: none;
+  border-radius: 5px;
+  padding: 5px 20px;
+  color: #fff;
+}
+
+.save-button button {
+  background-color: #57e2e5;
 }
