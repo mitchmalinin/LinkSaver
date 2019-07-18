@@ -21,7 +21,7 @@ const flash = require("connect-flash");
 hbs.registerPartials(__dirname + "/views/partials");
 // "mongodb://localhost/linksaver"
 mongoose
-  .connect("mongodb://localhost/linksaver", { useNewUrlParser: true })
+  .connect(process.env.MONGODB_URI, { useNewUrlParser: true })
   .then(x => {
     console.log(
       `Connected to Mongo! Database name: "${x.connections[0].name}"`
