@@ -26,7 +26,12 @@ document.addEventListener(
 );
 
 const mock = document.querySelector("#mock");
-const welcome = document.querySelector(".welcome");
+const welcome = document.getElementsByClassName("welcome-text");
 const tl = new TimelineMax();
 
-tl.fromTo(mock, 1.2, { x: "-150%" }, { x: "0%", ease: Power2.easeInOut });
+tl.fromTo(
+  welcome,
+  0.7,
+  { x: "-150%" },
+  { x: "0%", ease: Power2.easeInOut }
+).fromTo(mock, 0.7, { x: "-150%" }, { x: "0%", ease: Power2.easeInOut });
