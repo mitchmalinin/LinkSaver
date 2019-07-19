@@ -15,6 +15,7 @@ a {
   display: flex;
   justify-content: space-evenly;
   padding: 0 50px;
+  min-height: 100vh;
 }
 
 .home-page-content {
@@ -268,7 +269,7 @@ nav input {
   display: grid;
   grid-template-columns: repeat(auto-fill, 300px);
   grid-gap: 30px;
-  grid-auto-rows: 330px;
+  grid-auto-rows: 240px;
   // align-items: center;
   justify-content: center !important;
 }
@@ -295,8 +296,12 @@ nav input {
 }
 
 .card img {
-  // width: 30% !important;
+  width: 30% !important;
+  border-radius: 50% !important;
+  align-self: center !important;
+  padding: 1px !important;
 }
+
 .card-content .card-title {
   color: #4e6766 !important;
   font-size: 25px;
@@ -313,9 +318,12 @@ nav input {
   color: #713afc !important;
 }
 .card-image {
-  background-color: #343b3a94;
-  height: 200px;
+  background-image: linear-gradient(to right, #2edbaf, #57e2e5) !important;
+  height: 100px;
   border-radius: 5px 5px 0 0 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .bookmark-options {
@@ -454,7 +462,7 @@ h4 {
   display: grid;
   grid-template-columns: repeat(auto-fill, 300px);
   grid-gap: 30px;
-  grid-auto-rows: 330px;
+  grid-auto-rows: 240px;
   // align-items: center;
   justify-content: center !important;
 }
@@ -521,12 +529,14 @@ h4 {
 }
 
 .folder-card .card-image {
-  background-color: #fff !important;
+  // background-color: #fff !important;
   height: 100px;
   display: flex;
+  color: #fff !important;
   justify-content: center;
   align-items: center;
   color: #4e6766;
+  background-image: linear-gradient(to right, #713afc, #a682ff) !important;
 }
 
 .folder-card {
@@ -534,8 +544,9 @@ h4 {
 }
 
 .folder-card .card-content {
-  background-color: #4e6766;
+  // background-color: #2edbaf;
   border-radius: 0 0 5px 5px !important;
+  min-height: 80px;
 }
 
 .folder-edit-delete-buttons {
@@ -564,4 +575,7 @@ h4 {
 
 .save-button button {
   background-color: #57e2e5;
+}
+
+.this-option {
 }

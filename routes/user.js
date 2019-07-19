@@ -364,6 +364,31 @@ router.post("/create-folder", async (req, res, next) => {
     });
 });
 
+router.get("/public-folder/:id", (req, res, next) => {
+  let user = req.user;
+
+  Bookmark.find({ folder: req.params.id })
+    .then(bookmarks => {
+      Folder.find({ owner: req.user._id })
+        .then(folders => {
+          Folder.findById({ _id: req.params.id })
+            .then(folder => {
+              console.log("======Found the Folder Matching the Id===", folder);
+              res.render("userFolder", { user, bookmarks, folders, folder });
+            })
+            .catch(err => {
+              next(err);
+            });
+        })
+        .catch(err => {
+          next(err);
+        });
+    })
+    .catch(err => {
+      next(err);
+    });
+});
+
 router.get("/folder/:id", async (req, res, next) => {
   let data = req.user;
   try {

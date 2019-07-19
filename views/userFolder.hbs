@@ -1,0 +1,12 @@
+{{>nav}}
+<div class="dashboard">
+  {{>sidebar}}
+  <div class="total-user-content">
+    <h5>Bookmarks in {{folder.name}} </h5>
+    <div class="private-bookmarks">
+      {{#each bookmarks}}
+      {{> userBookmarkCard  bookmark= this folders=../folders}}
+      {{/each}}
+    </div>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 <div class="card folder-card">
-  <a href="/user/folder/{{this._id}}">
+  <a href="/user/public-folder/{{this._id}}">
     <div class="card-image waves-effect waves-block waves-light">
       <h5>{{this.name}}</h5>
     </div>
@@ -7,11 +7,6 @@
   <div class="card-content">
     <div class="this-options">
       <div class="folder-edit-delete-buttons ">
-        <a href="#/user/folder/{{this._id}}" class="modal-trigger">
-          <button class="folder-btns">
-            <i class="material-icons delete">add</i>
-          </button>
-        </a>
       </div>
       {{!-- start of edit modal --}}
       <div id="/user/folder/{{this._id}}" class="modal">

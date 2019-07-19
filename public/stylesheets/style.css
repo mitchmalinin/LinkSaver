@@ -10,7 +10,8 @@ a {
 .all-homepage-content {
   display: flex;
   justify-content: space-evenly;
-  padding: 0 50px; }
+  padding: 0 50px;
+  min-height: 100vh; }
 
 .home-page-content {
   background: linear-gradient(286deg, white 48%, #2edbaf 48%); }
@@ -218,7 +219,7 @@ nav input {
   display: grid;
   grid-template-columns: repeat(auto-fill, 300px);
   grid-gap: 30px;
-  grid-auto-rows: 330px;
+  grid-auto-rows: 240px;
   justify-content: center !important; }
 
 .user-btn {
@@ -236,6 +237,12 @@ nav input {
 .add-bookmark {
   margin-top: 30px; }
 
+.card img {
+  width: 30% !important;
+  border-radius: 50% !important;
+  align-self: center !important;
+  padding: 1px !important; }
+
 .card-content .card-title {
   color: #4e6766 !important;
   font-size: 25px;
@@ -250,9 +257,12 @@ nav input {
   color: #713afc !important; }
 
 .card-image {
-  background-color: #343b3a94;
-  height: 200px;
-  border-radius: 5px 5px 0 0 !important; }
+  background-image: linear-gradient(to right, #2edbaf, #57e2e5) !important;
+  height: 100px;
+  border-radius: 5px 5px 0 0 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
 
 .bookmark-options {
   display: flex;
@@ -365,7 +375,7 @@ h4 {
   display: grid;
   grid-template-columns: repeat(auto-fill, 300px);
   grid-gap: 30px;
-  grid-auto-rows: 330px;
+  grid-auto-rows: 240px;
   justify-content: center !important; }
 
 .one-user-card h5 {
@@ -417,19 +427,20 @@ h4 {
   justify-content: center !important; }
 
 .folder-card .card-image {
-  background-color: #fff !important;
   height: 100px;
   display: flex;
+  color: #fff !important;
   justify-content: center;
   align-items: center;
-  color: #4e6766; }
+  color: #4e6766;
+  background-image: linear-gradient(to right, #713afc, #a682ff) !important; }
 
 .folder-card {
   border-radius: 5px !important; }
 
 .folder-card .card-content {
-  background-color: #4e6766;
-  border-radius: 0 0 5px 5px !important; }
+  border-radius: 0 0 5px 5px !important;
+  min-height: 80px; }
 
 .folder-edit-delete-buttons {
   justify-content: center;
