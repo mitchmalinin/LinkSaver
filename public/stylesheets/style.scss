@@ -297,10 +297,11 @@ nav input {
 //input styling
 .input-container {
   max-width: 300px;
-  background-color: #ededed;
-  border: 1px solid #dfdfdf;
+  background-color: #4e676615;
+  padding-top: 9px;
   border-radius: 5px;
-  height: 25px;
+  height: 40px;
+  color: #4e6766;
 }
 input[type="file"] {
   display: none;
@@ -314,7 +315,7 @@ input[type="file"] {
   background: #2edbaf;
   color: #fff;
   max-height: 10px !important;
-  padding: 3px 5px;
+  padding: 11px;
   border: none;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
@@ -326,6 +327,7 @@ input[type="file"] {
 .upload {
   height: 100px;
   margin: 0;
+  margin-bottom: 15px;
 }
 .card img {
   width: 100px !important;
