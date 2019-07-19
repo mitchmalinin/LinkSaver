@@ -237,11 +237,43 @@ nav input {
 .add-bookmark {
   margin-top: 30px; }
 
+.input-container {
+  max-width: 300px;
+  background-color: #ededed;
+  border: 1px solid #dfdfdf;
+  border-radius: 5px;
+  height: 25px; }
+
+input[type="file"] {
+  display: none; }
+
+.file-info {
+  font-size: 0.9em;
+  padding: 3px;
+  height: 20px !important; }
+
+.browse-btn {
+  background: #2edbaf;
+  color: #fff;
+  max-height: 10px !important;
+  padding: 3px 5px;
+  border: none;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px; }
+
+.browse-btn:hover {
+  background: #4ec0b4; }
+
+.upload {
+  height: 100px;
+  margin: 0; }
+
 .card img {
-  width: 30% !important;
+  width: 100px !important;
   border-radius: 50% !important;
   align-self: center !important;
-  padding: 1px !important; }
+  padding: 3px !important;
+  height: 100px; }
 
 .card-content .card-title {
   color: #4e6766 !important;

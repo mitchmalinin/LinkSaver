@@ -10,14 +10,14 @@ const ensureLogin = require("connect-ensure-login");
 const flash = require("connect-flash");
 const LocalStrategy = require("passport-local").Strategy;
 const bodyParser = require("body-parser");
+const uploadCloud = require("../bin/config/cloudinary.js");
 
 router.use(bodyParser());
 
 //FIXME: Error when the email is not right
 //TODO: Try to figure out how to signup and login at the same time
-router.post("/sign-up", (req, res, next) => {
+router.post("/sign-up", uploadCloud.single("profilePic"), (req, res, next) => {
   let data = req.body;
-
   console.table(req.body);
   const userName = req.body.username;
   const userPassword = req.body.password;
@@ -26,6 +26,7 @@ router.post("/sign-up", (req, res, next) => {
   const lastName = req.body.lastName;
   const followers = req.body.followers;
   const following = req.body.following;
+  const imgPath = req.file.url;
 
   if (
     userName === "" ||
@@ -57,7 +58,8 @@ router.post("/sign-up", (req, res, next) => {
           firstName: firstName,
           lastName: lastName,
           followers: followers,
-          following: following
+          following: following,
+          img: imgPath
         })
           .then(userDB => {
             // console.log("Test");

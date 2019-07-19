@@ -21,7 +21,7 @@
           {{success}}
         </p>
         {{/if}}
-        <form action="/user/sign-up" class="col s12" method="POST">
+        <form action="/user/sign-up" class="col s12" method="POST" enctype="multipart/form-data">
           <div class="row index-form">
             <div class="input-field col s12">
               <input name="firstName" type="text" class="validate">
@@ -42,6 +42,16 @@
             <div class="input-field col s12">
               <input name="password" type="password" class="validate">
               <label>Password:</label>
+            </div>
+            <div class="input-field col s12 upload">
+              <p>Profile Pic:</p>
+              <div class="input-container">
+                <input class="upload" type="file" name="profilePic" id='real-input'>
+                <a class="browse-btn">
+                  Browse Files
+                </a>
+                <span class="file-info">Upload a file</span>
+              </div>
             </div>
           </div>
           <button class="waves-effect waves-light btn-large sign-up-btn">sign up</button>
