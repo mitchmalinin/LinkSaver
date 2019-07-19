@@ -24,3 +24,9 @@ document.addEventListener(
   },
   false
 );
+
+const mock = document.querySelector("#mock");
+const welcome = document.querySelector(".welcome");
+const tl = new TimelineMax();
+
+tl.fromTo(mock, 1.2, { x: "-150%" }, { x: "0%", ease: Power2.easeInOut });
