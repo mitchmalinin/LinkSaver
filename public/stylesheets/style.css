@@ -238,7 +238,7 @@ nav input {
   margin-top: 30px; }
 
 .input-container {
-  max-width: 300px;
+  width: 100%;
   background-color: #4e676615;
   padding-top: 9px;
   border-radius: 5px;
@@ -263,7 +263,8 @@ input[type="file"] {
   border-bottom-left-radius: 5px; }
 
 .browse-btn:hover {
-  background: #4ec0b4; }
+  background: #4ec0b4;
+  cursor: pointer; }
 
 .upload {
   height: 100px;
